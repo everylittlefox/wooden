@@ -33,7 +33,7 @@ const Timer: React.FC<TimerProps> = ({ seconds, type }) => {
   )
 
   return (
-    <div className="flex flex-col items-center pr-36">
+    <div className="flex flex-col items-center">
       <div className="w-60">
         <CircularProgressbarWithChildren
           strokeWidth={4}
@@ -47,7 +47,7 @@ const Timer: React.FC<TimerProps> = ({ seconds, type }) => {
           <span className="text-5xl text-gray-500">{toHHMMSS(secs)}</span>
         </CircularProgressbarWithChildren>
       </div>
-      <Button onClick={() => setTicking(!ticking)} className="mt-auto">
+      <Button onClick={() => setTicking(!ticking)} className="mt-16">
         {ticking ? (
           <PauseIcon className="w-6 h-6 text-gray-500" />
         ) : (

@@ -3,17 +3,18 @@ import { useMemo } from 'react'
 type StepperProps = {
   steps: number
   current?: number
+  className?: string
 }
 
 const BASE_STEP_CLASSES =
   'flex items-center justify-center font-medium w-10 h-10 border rounded-full'
 const FOLLOWING_STEP_CLASSES =
-  'before:block before:h-12 before:w-2 before:bg-gray-200 before:absolute relative before:bottom-12 mt-16 before:rounded-full'
+  'before:block before:h-2 before:w-12 before:bg-gray-200 before:absolute relative before:right-12 ml-16 before:rounded-full'
 const ACTIVE_STEP_CLASSES = 'border-teal-400 font-semibold text-teal-600'
 const COMPLETED_STEP_CLASSES =
   'bg-teal-400 font-bold border-none text-white'
 
-const Stepper: React.FC<StepperProps> = ({ steps, current = 1 }) => {
+const Stepper: React.FC<StepperProps> = ({ steps, current = 1, className='' }) => {
   const stepElements = useMemo(
     () =>
       Array.from({ length: steps })
@@ -36,7 +37,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, current = 1 }) => {
     [steps, current]
   )
 
-  return <div>{stepElements}</div>
+  return <div className={'flex ' + className}>{stepElements}</div>
 }
 
 export default Stepper

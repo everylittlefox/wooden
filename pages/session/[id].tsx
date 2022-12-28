@@ -43,13 +43,9 @@ export default function Set() {
             <div className="px-8 py-3">
               <h1 className="text-2xl">{session.name}</h1>
             </div>
-            <div className="flex-1 flex items-center justify-center">
-              <div className="flex">
-                <Timer seconds={session.taskDuration} type='task' />
-                <div className="px-10">
-                  <Stepper steps={4} current={4} />
-                </div>
-              </div>
+            <div className="flex-1 flex flex-col items-center justify-center">
+              <Stepper className="mb-24" steps={4} />
+              <Timer seconds={session.taskDuration} type="task" />
             </div>
           </div>
         </Layout>
