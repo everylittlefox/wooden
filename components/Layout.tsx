@@ -1,6 +1,6 @@
-import { Montserrat } from '@next/font/google'
+import { Raleway } from '@next/font/google'
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const raleway = Raleway({ subsets: ['latin'] })
 
 type LayoutProps = { className?: string }
 
@@ -9,7 +9,7 @@ const Layout: React.FC<React.PropsWithChildren & LayoutProps> = ({
   className = ''
 }) => {
   return (
-    <main className={`min-h-screen ${montserrat.className} ${className}`}>
+    <main className={`min-h-screen text-gray-700 ${raleway.className} ${className}`}>
       {children}
     </main>
   )
