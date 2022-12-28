@@ -19,11 +19,15 @@ const useStudySessionStore = create<StudySessionStore>((set, get) => ({
   create(ss) {
     set((store) => ({
       ...store,
-      sessions: store.sessions.concat(ss)
+      sessions: store.sessions.concat({
+        ...ss,
+        taskDuration: ss.taskDuration * 60,
+        breakDuration: ss.breakDuration * 60
+      })
     }))
   },
   find(id) {
-    return get().sessions.find(s => s.id === id)
+    return get().sessions.find((s) => s.id === id)
   }
 }))
 
