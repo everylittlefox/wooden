@@ -11,7 +11,7 @@ const useTimerStore = create<TimerState>((set, get) => ({
   type: null,
   secondsLeft: -1,
   tick() {
-    set((s) => ({ secondsLeft: s.secondsLeft - 1 }))
+    if (get().secondsLeft > 0) set((s) => ({ secondsLeft: s.secondsLeft - 1 }))
   },
   init(type, secondsLeft) {
     set(() => ({ type, secondsLeft }))

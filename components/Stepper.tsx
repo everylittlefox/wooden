@@ -7,10 +7,10 @@ type StepperProps = {
 }
 
 const BASE_STEP_CLASSES =
-  'flex items-center justify-center font-medium w-10 h-10 border rounded-full'
+  'flex items-center justify-center font-medium w-10 h-10 rounded-full shadow-lg'
 const FOLLOWING_STEP_CLASSES =
   'before:block before:h-2 before:w-12 before:bg-gray-200 before:absolute relative before:right-12 ml-16 before:rounded-full'
-const ACTIVE_STEP_CLASSES = 'border-teal-400 font-semibold text-teal-600'
+const ACTIVE_STEP_CLASSES = 'border border-teal-400 font-semibold text-teal-600'
 const COMPLETED_STEP_CLASSES =
   'bg-teal-400 font-bold border-none text-white'
 

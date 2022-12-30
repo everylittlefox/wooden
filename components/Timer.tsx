@@ -13,9 +13,10 @@ import PlayIcon from './PlayIcon'
 type TimerProps = {
   seconds: number
   type: 'break' | 'task'
+  onFinish?: () => void
 }
 
-const Timer: React.FC<TimerProps> = ({ seconds, type }) => {
+const Timer: React.FC<TimerProps> = ({ seconds, type, onFinish }) => {
   const initTimer = useTimerStore((s) => s.init)
   const tick = useTimerStore((s) => s.tick)
   const secs = useTimerStore((s) => s.secondsLeft)
@@ -25,12 +26,23 @@ const Timer: React.FC<TimerProps> = ({ seconds, type }) => {
     initTimer(type, seconds)
   }, [initTimer, type, seconds])
 
+  useEffect(() => {
+    if (type === 'break') setTicking(true)
+  }, [type])
+
   useInterval(
     () => {
       tick()
     },
     ticking ? 1000 : null
   )
+
+  useEffect(() => {
+    if (secs === 0) {
+      onFinish && onFinish()
+      setTicking(false)
+    }
+  }, [secs]) //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex flex-col items-center">
@@ -45,15 +57,20 @@ const Timer: React.FC<TimerProps> = ({ seconds, type }) => {
           maxValue={1}
         >
           <span className="text-5xl text-gray-500">{toHHMMSS(secs)}</span>
+          <span className="text-sm text-gray-500 mt-8">{type}</span>
         </CircularProgressbarWithChildren>
       </div>
-      <Button onClick={() => setTicking(!ticking)} className="mt-16">
-        {ticking ? (
-          <PauseIcon className="w-6 h-6 text-gray-500" />
-        ) : (
-          <PlayIcon className="w-6 h-6 text-gray-500" />
+      <div className="mt-16">
+        {type === 'task' && (
+          <Button onClick={() => setTicking(!ticking)}>
+            {ticking ? (
+              <PauseIcon className="w-6 h-6 text-gray-500" />
+            ) : (
+              <PlayIcon className="w-6 h-6 text-gray-500" />
+            )}
+          </Button>
         )}
-      </Button>
+      </div>
     </div>
   )
 }
